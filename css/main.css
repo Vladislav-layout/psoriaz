@@ -1,4 +1,4 @@
-ul, li, input {
+ul, li, input,p {
     display: block;
     padding: 0;
     margin: 0;
@@ -154,14 +154,156 @@ ul, li, input {
     padding-bottom: 18px;
     display: block;
 }
+.price__title{
+    margin-bottom: 31px;
+}
 .price__title h1{
-    margin-top: 122px;
+    margin-top: 147px;
+    font-family: Museo Sans Cyrl,sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 48px;
+    margin-bottom: 31px;
+}
+.price__title h2{
+    font-family: Museo Sans Cyrl, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    padding: 0;
+    margin-top: 5px;
+}
+.price__title p{
+    font-family: Museo Sans Cyrl, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    padding: 0;
+}
+.price__img{
+    margin-right: 24px;
+    margin-bottom: 16px;
+}
+.font_size{
+    font-size: 24px;
+    line-height: 29px;
+}
+.bott{
+    margin-top: 145px;
+}
+.result h1{
+    margin-top: 147px;
     font-family: Museo Sans Cyrl,sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 40px;
     line-height: 48px;
 }
+/*.result div{
+
+}
+.objects {
+    z-index:10;
+    width: 235px;
+    height: 364px;
+    background-color: #ffffff;
+    opacity: 80%;
+
+.objects:hover{
+    opacity: 0 ;
+}
+.hide{
+    padding-top: 50%;
+    width: 235px;
+    height: 364px;
+    background-color: #ffffff;
+}*/
+     /* стили основного контейнера слайдера */
+ .slider {
+     margin-top: 29px;
+     overflow: hidden;
+ }
+/* стили для контейнера слайдов */
+.slider__items {
+    display: flex;
+    transition: transform 0.8s ease;
+}
+/* стили для слайдов */
+.slider__item {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+/* стили для индикаторов */
+.slider__indicators {
+    position: absolute;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+    margin-right: 15%;
+    margin-left: 15%;
+    bottom: 98px;
+}
+
+.slider__indicators li {
+    text-indent: 0;
+    margin: 0 5px;
+    width: 14px;
+    height: 14px;
+    border: none;
+    border-radius: 100%;
+    line-height: 30px;
+    color: #CACACA;
+    background-color: #CACACA;
+    transition: all 0.25s ease;
+}
+
+.slider__indicators li.active {
+    background-color: #DCA818;
+}
+.slider__indicators li:hover {
+    background-color: #DCA818;
+    cursor: pointer;
+}
+.but{
+    margin-top: 68px !important;
+}
+.input_btn_2{
+    background: #DCA818;
+    color: #ffffff;
+    border: 0;
+    border-radius: 50px;
+    padding: 10px 0;
+    cursor: pointer;
+    font-family: Museo Sans Cyrl, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    width: 293px !important;
+    height: 44px !important;
+    text-decoration: none;
+}
+.input_btn_2:hover{
+     text-decoration: none;
+     color:#000;
+ }
+.input_btn_2:active{
+    color:#DCA818;
+    background:#ffffff;
+    border: 1px solid #DCA818;
+}
+
+
+
+
+
+
+
 
 
 
@@ -171,3 +313,4 @@ ul, li, input {
     font-family: Museo Sans Cyrl, sans-serif;
     src: url("../fonts/Museo-Sans-Cyr/MuseoSansCyrl_0.otf") format("opentype");
 }
+
