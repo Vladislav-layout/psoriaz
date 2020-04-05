@@ -40,12 +40,12 @@
                                         </a>
                                     </li>
                                     <li class="menu__item">
-                                        <a href="#">
+                                        <a href="#specialists">
                                             Специалисты
                                         </a>
                                     </li>
                                     <li class="menu__item">
-                                        <a href="#">
+                                        <a href="#contacts">
                                             Контакты
                                         </a>
                                     </li>
@@ -53,7 +53,7 @@
                             </nav>
                         </div>
                         <div class="number d-flex justify-content-end">
-                            <i class="fas fa-phone-alt"></i>
+                            <i class="fas numb fa-phone-alt"></i>
                             <a href="tel:+74992515987">+7 499 251 59 87</a>
                         </div>
                     </div>
@@ -190,235 +190,273 @@
                                 </a>
                             </div>
                 </div>
-                            <script>
-                                'use strict';
-                                var slideShow = (function () {
-                                    return function (selector, config) {
-                                        var
-                                            _slider = document.querySelector(selector), // основный элемент блока
-                                            _sliderContainer = _slider.querySelector('.slider__items'), // контейнер для .slider-item
-                                            _sliderItems = _slider.querySelectorAll('.slider__item'), // коллекция .slider-item
-                                            _sliderControls = _slider.querySelectorAll('.slider__control'), // элементы управления
-                                            _currentPosition = 0, // позиция левого активного элемента
-                                            _transformValue = 0, // значение транфсофрмации .slider_wrapper
-                                            _transformStep = 100, // величина шага (для трансформации)
-                                            _itemsArray = [], // массив элементов
-                                            _timerId,
-                                            _indicatorItems,
-                                            _indicatorIndex = 0,
-                                            _indicatorIndexMax = _sliderItems.length - 1,
-                                            _stepTouch = 50,
-                                            _config = {
-                                                isAutoplay: true, // автоматическая смена слайдов
-                                                directionAutoplay: 'next', // направление смены слайдов
-                                                delayAutoplay: 3000, // интервал между автоматической сменой слайдов
-                                                isPauseOnHover: true // устанавливать ли паузу при поднесении курсора к слайдеру
-                                            };
-
-                                        // настройка конфигурации слайдера в зависимости от полученных ключей
-                                        for (var key in config) {
-                                            if (key in _config) {
-                                                _config[key] = config[key];
-                                            }
-                                        }
-
-                                        // наполнение массива _itemsArray
-                                        for (var i = 0, length = _sliderItems.length; i < length; i++) {
-                                            _itemsArray.push({ item: _sliderItems[i], position: i, transform: 0 });
-                                        }
-
-                                        // переменная position содержит методы с помощью которой можно получить минимальный и максимальный индекс элемента, а также соответствующему этому индексу позицию
-                                        var position = {
-                                            getItemIndex: function (mode) {
-                                                var index = 0;
-                                                for (var i = 0, length = _itemsArray.length; i < length; i++) {
-                                                    if ((_itemsArray[i].position < _itemsArray[index].position && mode === 'min') || (_itemsArray[i].position > _itemsArray[index].position && mode === 'max')) {
-                                                        index = i;
-                                                    }
-                                                }
-                                                return index;
-                                            },
-                                            getItemPosition: function (mode) {
-                                                return _itemsArray[position.getItemIndex(mode)].position;
-                                            }
-                                        };
-
-                                        // функция, выполняющая смену слайда в указанном направлении
-                                        var _move = function (direction) {
-                                            var nextItem, currentIndicator = _indicatorIndex;;
-                                            if (direction === 'next') {
-                                                _currentPosition++;
-                                                if (_currentPosition > position.getItemPosition('max')) {
-                                                    nextItem = position.getItemIndex('min');
-                                                    _itemsArray[nextItem].position = position.getItemPosition('max') + 1;
-                                                    _itemsArray[nextItem].transform += _itemsArray.length * 100;
-                                                    _itemsArray[nextItem].item.style.transform = 'translateX(' + _itemsArray[nextItem].transform + '%)';
-                                                }
-                                                _transformValue -= _transformStep;
-                                                _indicatorIndex = _indicatorIndex + 1;
-                                                if (_indicatorIndex > _indicatorIndexMax) {
-                                                    _indicatorIndex = 0;
-                                                }
-                                            } else {
-                                                _currentPosition--;
-                                                if (_currentPosition < position.getItemPosition('min')) {
-                                                    nextItem = position.getItemIndex('max');
-                                                    _itemsArray[nextItem].position = position.getItemPosition('min') - 1;
-                                                    _itemsArray[nextItem].transform -= _itemsArray.length * 100;
-                                                    _itemsArray[nextItem].item.style.transform = 'translateX(' + _itemsArray[nextItem].transform + '%)';
-                                                }
-                                                _transformValue += _transformStep;
-                                                _indicatorIndex = _indicatorIndex - 1;
-                                                if (_indicatorIndex < 0) {
-                                                    _indicatorIndex = _indicatorIndexMax;
-                                                }
-                                            }
-                                            _sliderContainer.style.transform = 'translateX(' + _transformValue + '%)';
-                                            _indicatorItems[currentIndicator].classList.remove('active');
-                                            _indicatorItems[_indicatorIndex].classList.add('active');
-                                        };
-
-                                        // функция, осуществляющая переход к слайду по его порядковому номеру
-                                        var _moveTo = function (index) {
-                                            var i = 0, direction = (index > _indicatorIndex) ? 'next' : 'prev';
-                                            while (index !== _indicatorIndex && i <= _indicatorIndexMax) {
-                                                _move(direction);
-                                                i++;
-                                            }
-                                        };
-
-                                        // функция для запуска автоматической смены слайдов через промежутки времени
-                                        var _startAutoplay = function () {
-                                            if (!_config.isAutoplay) {
-                                                return;
-                                            }
-                                            _stopAutoplay();
-                                            _timerId = setInterval(function () {
-                                                _move(_config.directionAutoplay);
-                                            }, _config.delayAutoplay);
-                                        };
-
-                                        // функция, отключающая автоматическую смену слайдов
-                                        var _stopAutoplay = function () {
-                                            clearInterval(_timerId);
-                                        };
-
-                                        // функция, добавляющая индикаторы к слайдеру
-                                        var _addIndicators = function () {
-                                            var indicatorsContainer = document.createElement('ol');
-                                            indicatorsContainer.classList.add('slider__indicators');
-                                            for (var i = 0, length = _sliderItems.length; i < length; i++) {
-                                                var sliderIndicatorsItem = document.createElement('li');
-                                                if (i === 0) {
-                                                    sliderIndicatorsItem.classList.add('active');
-                                                }
-                                                sliderIndicatorsItem.setAttribute("data-slide-to", i);
-                                                indicatorsContainer.appendChild(sliderIndicatorsItem);
-                                            }
-                                            _slider.appendChild(indicatorsContainer);
-                                            _indicatorItems = _slider.querySelectorAll('.slider__indicators > li')
-                                        };
-
-                                        var _isTouchDevice = function () {
-                                            return !!('ontouchstart' in window || navigator.maxTouchPoints);
-                                        };
-
-                                        // функция, осуществляющая установку обработчиков для событий
-                                        var _setUpListeners = function () {
-                                            var _startX = 0;
-                                            if (_isTouchDevice()) {
-                                                _slider.addEventListener('touchstart', function (e) {
-                                                    _startX = e.changedTouches[0].clientX;
-                                                    _startAutoplay();
-                                                });
-                                                _slider.addEventListener('touchend', function (e) {
-                                                    var
-                                                        _endX = e.changedTouches[0].clientX,
-                                                        _deltaX = _endX - _startX;
-                                                    if (_deltaX > _stepTouch) {
-                                                        _move('prev');
-                                                    } else if (_deltaX < -_stepTouch) {
-                                                        _move('next');
-                                                    }
-                                                    _startAutoplay();
-                                                });
-                                            } else {
-                                                for (var i = 0, length = _sliderControls.length; i < length; i++) {
-                                                    _sliderControls[i].classList.add('slider__control_show');
-                                                }
-                                            }
-                                            _slider.addEventListener('click', function (e) {
-                                                if (e.target.classList.contains('slider__control')) {
-                                                    e.preventDefault();
-                                                    _move(e.target.classList.contains('slider__control_next') ? 'next' : 'prev');
-                                                    _startAutoplay();
-                                                } else if (e.target.getAttribute('data-slide-to')) {
-                                                    e.preventDefault();
-                                                    _moveTo(parseInt(e.target.getAttribute('data-slide-to')));
-                                                    _startAutoplay();
-                                                }
-                                            });
-                                            document.addEventListener('visibilitychange', function () {
-                                                if (document.visibilityState === "hidden") {
-                                                    _stopAutoplay();
-                                                } else {
-                                                    _startAutoplay();
-                                                }
-                                            }, false);
-                                            if (_config.isPauseOnHover && _config.isAutoplay) {
-                                                _slider.addEventListener('mouseenter', function () {
-                                                    _stopAutoplay();
-                                                });
-                                                _slider.addEventListener('mouseleave', function () {
-                                                    _startAutoplay();
-                                                });
-                                            }
-                                        };
-
-                                        // добавляем индикаторы к слайдеру
-                                        _addIndicators();
-                                        // установливаем обработчики для событий
-                                        _setUpListeners();
-                                        // запускаем автоматическую смену слайдов, если установлен соответствующий ключ
-                                        _startAutoplay();
-
-                                        return {
-                                            // метод слайдера для перехода к следующему слайду
-                                            next: function () {
-                                                _move('next');
-                                            },
-                                            // метод слайдера для перехода к предыдущему слайду
-                                            left: function () {
-                                                _move('prev');
-                                            },
-                                            // метод отключающий автоматическую смену слайдов
-                                            stop: function () {
-                                                _config.isAutoplay = false;
-                                                _stopAutoplay();
-                                            },
-                                            // метод запускающий автоматическую смену слайдов
-                                            cycle: function () {
-                                                _config.isAutoplay = true;
-                                                _startAutoplay();
-                                            }
-                                        }
-                                    }
-                                }());
-
-                                slideShow('.slider', {
-                                    isAutoplay: true
-                                });
-                            </script>
-
-
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-                <!-- Подключаем плагин Popper -->
-                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-
-                <!-- Подключаем Bootstrap JS -->
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous" ></script>
+                <script src="js/main.js"></script>
             </div>
         </div>
     </section>
+    <section id="specialists" class="specialists">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center spec">
+                    <h1>Специалисты</h1>
+                  <!--  <div class="slideshow-container">
+                        <div class="mySlides show">
+                            <div class="numberText">1/3</div>
+                            <img src="img/Rect1.png" alt="">
+                            <div class="text">Text</div>
+                        </div>
+                        <div class="mySlides show">
+                            <div class="numberText">2/3</div>
+                            <img src="img/Rect2.png"  alt="">
+                            <div class="text">Text</div>
+                        </div>
+                        <div class="mySlides show">
+                            <div class="numberText">3/3</div>
+                            <img src="img/Rect3.png"  alt="">
+                            <div class="text">Text</div>
+                        </div>
+                        <br>
+                        <div style="text-align: center">
+                            <span class="dot" onclick="currentSlide(1)"></span>
+                            <span class="dot" onclick="currentSlide(2)"></span>
+                            <span class="dot" onclick="currentSlide(3)"></span>
+                        </div>-->
+                    <div id="mySliders" class="col-lg-12 bigman">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators carousel-indicators-numbers">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active" ></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1" ></li>
+                            </ol>
+
+
+                            <div class="carousel-inner justify-content-center">
+                                <div class="carousel-item active">
+                                    <div class="slide d-flex">
+                                        <img src="img/doc1.png" alt="" class="text-left">
+                                        <div class="flex-column">
+                                            <h1 class="text-left">Мошнина Зоя Ивановна, врач-дерматолог, <br> кандидат медицинских наук</h1>
+                                            <div class="d-flex ">
+                                                <p class="p1 text-left">Окончила в 1983 году Алтайский <br>
+                                                    государственный медицинский <br>
+                                                    институт, затем клиническую <br>
+                                                    ординатуру и аспирантуру. Защити- <br>
+                                                    ла диссертацию по теме: «ПУВА <br>
+                                                    терапия атопического дерматита». <br>
+                                                    Опытный врач, работает в «Псориаз <br>
+                                                    -центре» с момента его открытия.</p>
+                                                <p class="p2 text-left">Автор более 40 научных трудов, 8 <br>
+                                                    Патентов РФ на изобретение,таких <br>
+                                                    как «Способ лечения атопического <br>
+                                                    дерматита», «Способ лечения <br>
+                                                    псориаза» и др., участник научных <br>
+                                                    международных симпозиумов в <br>
+                                                    Москве, Санкт-Петербурге, Вене, <br>
+                                                    Лондоне, Париже, Цюрихе.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               <div class="carousel-item ">
+                                   <div class="slide d-flex">
+                                       <img src="img/doc1.png" alt="" class="text-left">
+                                       <div class="flex-column">
+                                           <h1 class="text-left">Мошнина Зоя Ивановна, врач-дерматолог, <br> кандидат медицинских наук</h1>
+                                           <div class="d-flex ">
+                                               <p class="p1 text-left">Окончила в 1983 году Алтайский <br>
+                                                   государственный медицинский <br>
+                                                   институт, затем клиническую <br>
+                                                   ординатуру и аспирантуру. Защити- <br>
+                                                   ла диссертацию по теме: «ПУВА <br>
+                                                   терапия атопического дерматита». <br>
+                                                   Опытный врач, работает в «Псориаз <br>
+                                                   -центре» с момента его открытия.</p>
+                                               <p class="p2 text-left">Автор более 40 научных трудов, 8 <br>
+                                                   Патентов РФ на изобретение,таких <br>
+                                                   как «Способ лечения атопического <br>
+                                                   дерматита», «Способ лечения <br>
+                                                   псориаза» и др., участник научных <br>
+                                                   международных симпозиумов в <br>
+                                                   Москве, Санкт-Петербурге, Вене, <br>
+                                                   Лондоне, Париже, Цюрихе.</p>
+                                           </div>
+                                       </div>
+                                   </div>
+                                </div>
+                                <div class="m-auto d-flex justify-content-center">
+                                    <a href="#" class="input_btn_3 text-center">
+                                        Оставить заявку
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                        <!-- Подключаем плагин Popper -->
+                        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+                        <!-- Подключаем Bootstrap JS -->
+                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous" ></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contacts" class="contacts">
+        <div class="container">
+            <div class="row d-flex">
+                <div class="col-lg-8 justify-content-start contact d-flex">
+                    <div class="flex-column col-lg-6">
+                        <h1 class="cont">Контакты</h1>
+                        <div class="d-flex">
+                            <img src="img/Ellipse%2011.png" alt="clock" class="clock">
+                            <h1>Режим работы</h1>
+                        </div>
+                        <div class="d-flex">
+                            <p class="raspisanie">Понедельник – Пятница <br>
+                                Суббота <br>
+                                Воскресение
+                            </p>
+                            <p>
+                                10:00 — 20:00 <br>
+                                10:00 — 15:00 <br>
+                                выходной
+                            </p>
+                        </div>
+                        <div class="d-flex">
+                            <i class="fas kont fa-map-marker-alt"></i>
+                            <p class="raspisanie">
+                                <a href="https://2gis.ru/moscow/search/%D0%B3.%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%BC.%20%D0%91%D0%B5%D0%BB%D0%BE%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B0%D1%8F%2C%20%D1%83%D0%BB.%20%D0%9D%D0%BE%D0%B2%D0%BE%D0%BB%D0%B5%D1%81%D0%BD%D0%B0%D1%8F%2C%201%2F49/geo/4504235282564236/37.591807%2C55.781545?m=37.591846%2C55.781529%2F15.42">г. Москва, м. Белорусская, <br>
+                                    ул. Новолесная, 1/49</a>
+                            </p>
+                        </div>
+                        <div class="d-flex">
+                            <i class="fas kont fa-phone-alt"></i>
+                            <p class="raspisanie">
+                                <a href="tel:+74992515987"> +7 499 251 5987</a>
+                                <br>
+                                <a href="tel:+79091624873"> +7 909 162 4873</a>
+                            </p>
+                        </div>
+                        <div class="d-flex">
+                            <i class="fas kont fa-envelope" aria-hidden="true"></i>
+                            <p>
+                                <a href="mailto:WarmFloor@mail.ru?subject=Вопрос по Теплому Полу">psoriascentr@mail.ru</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex-column col-lg-6 cont2">
+                        <div class="d-flex">
+                            <img src="img/Ellipse%2011.png" alt="clock" class="clock">
+                            <h1>Реквизиты</h1>
+                        </div>
+                        <div class="sdvig">
+                        <div>
+                            <p class="raspisanie">
+                                Общество с ограниченной <br>
+                                ответственностью <br>
+                                “Медицинский центр <br>
+                                "Компания АЛЕКСАНДР" <br>
+                                ИНН 7707113509 <br>
+                                ОГРН 1037739350395
+                            </p>
+                        </div>
+                        <div class="d-flex">
+                            <img src="img/pdf.png" alt="pdf" class="pdf">
+                            <p class="raspisanie">
+                                Медицинская лицензия <br>
+                                № ЛО-78-0Т-007536
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-column col-lg-4 ml-auto">
+                    <div class="forma text-center">
+                        <h1 >
+                            Оставьте заявку
+                        </h1>
+                        <form action="#" class="form align-items-center">
+                            <div>
+                                <input type="Your Name" class="form__name" placeholder="Имя" required>
+                            </div>
+                            <div>
+                                <input type="Your Number" class="form__number" placeholder="+7 923 123 45-67" required>
+                            </div>
+                            <div>
+                                <input type="Your Email" class="form__email" placeholder="E-mail" required>
+                            </div>
+                            <textarea class="form__com" aria-label="With textarea">Сообщение</textarea>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="map" class="map">
+        <div class="container-fluid" style="padding: 0;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3665.881260467343!2d37.59028572937306!3d55.78251471575727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a193c556515%3A0x771a4c31acb620f5!2z0J3QvtCy0L7Qu9C10YHQvdCw0Y8g0YPQuy4sIDEvNDksINCc0L7RgdC60LLQsCwgMTI3MDU1!5e0!3m2!1sru!2sru!4v1586089609184!5m2!1sru!2sru" width="100%" height="476px" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer id="footer" class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="container">
+                    <h1>
+                        Псориаз-Центр
+                    </h1>
+                    <div class="d-flex">
+                        <div class="col-lg-4 d-flex foot__menu">
+                            <div class="flex-column foot__menu_1">
+                               <p><a href="#info">Методы лечения</a></p>
+                               <p><a href="#price">Результаты</a></p>
+                                <p><a href="#price">Стоимость</a></p>
+                            </div>
+                            <div class="flex-column">
+                                <p><a href="#specialists">Специалисты</a></p>
+                                <p><a href="#contacts">Контакты</a></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 d-flex foot__menu">
+                            <div class="flex-column foot__menu_1">
+                                <p> Понедельник – Пятница</p>
+                                <p>Суббота</p>
+                                <p>Воскресение</p>
+                            </div>
+                            <div class="flex-column">
+                                   <p> 10:00 — 20:00</p>
+                                   <p> 10:00 — 15:00</p>
+                                    <p>выходной</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="d-flex ii">
+                                <p>
+                                    <a href="https://2gis.ru/moscow/search/%D0%B3.%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%BC.%20%D0%91%D0%B5%D0%BB%D0%BE%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B0%D1%8F%2C%20%D1%83%D0%BB.%20%D0%9D%D0%BE%D0%B2%D0%BE%D0%BB%D0%B5%D1%81%D0%BD%D0%B0%D1%8F%2C%201%2F49/geo/4504235282564236/37.591807%2C55.781545?m=37.591846%2C55.781529%2F15.42">г. Москва, м. Белорусская, <br>
+                                        ул. Новолесная, 1/49</a>
+                                </p>
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="d-flex ii">
+                                <p>
+                                    <a href="tel:+74992515987"> +7 499 251 5987</a>
+                                </p>
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="d-flex ii">
+                                <p>
+                                    <a href="mailto:WarmFloor@mail.ru?subject=Вопрос по Теплому Полу">psoriascentr@mail.ru</a>
+                                </p>
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

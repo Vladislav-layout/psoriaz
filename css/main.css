@@ -57,7 +57,7 @@ ul, li, input,p {
 .number:hover a {
     color: #DCA818;
 }
-.fas{
+.numb{
     font-size: 15px;
     margin-top: 39px;
     padding-right: 5px;
@@ -297,17 +297,290 @@ ul, li, input,p {
     background:#ffffff;
     border: 1px solid #DCA818;
 }
+.spec{
+    margin-top: 188px;
+    margin-bottom: 100px;
+}
+.carousel-inner img {
+    width:312px;
+    height: 312px;
+    margin-top: 14px;
+}
 
+.carousel-indicators-numbers{
+    left: 450px !important;
+}
 
+.carousel-indicators-numbers li {
+    text-indent: 0;
+    margin: 0 5px;
+    width: 13px;
+    height: 13px;
+    border: none;
+    border-radius: 100%;
+    line-height: 30px;
+    color: #cccccc;
+    background-color: #cccccc;
+    transition: all 0.8s ease;
+}
+.carousel-indicators-numbers li.active {
+    width: 13px;
+    height: 13px;
+    background: #DCA818;
+}
+.carousel-indicators-numbers li:hover {
+    width: 13px;
+    height: 13px;
+    background: #DCA818;
+}
 
+.carousel-inner h1{
+    margin-top: 25px;
+    margin-left: 73px;
+    color: #000;
+    font-family: Museo Sans Cyrl,sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 30px;
+}
+.carousel-caption{
+    margin-left: 80px;
+    margin-bottom: 80px;
+}
+.p1{
+    color: #000;
+    margin-left: 73px;
+    font-family: Museo Sans Cyrl,sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    width: 325px;
+    padding-top: 39px;
 
+}
+.p2{
+    color: #000;
+    font-family: Museo Sans Cyrl,sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    margin-left: 59px;
+    width: 325px;
+    padding-top: 39px;
+}
+.slide{
+    width: 100%;
+    height: 400px;
+    margin-top: 14px;
+}
+.input_btn_3{
+    position: relative;
+    background: #DCA818;
+    color: #ffffff;
+    border: 0;
+    border-radius: 50px;
+    padding: 10px 0;
+    cursor: pointer;
+    font-family: Museo Sans Cyrl, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    width: 293px !important;
+    height: 44px !important;
+    text-decoration: none;
+    margin-top: 358px;
+    margin-right: 70px;
+}
+.input_btn_3:hover{
+    text-decoration: none;
+    color:#000;
+    cursor: pointer;
+}
+.cont{
+    font-family: Museo Sans Cyrl,sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 48px;
+    margin-top: 115px;
+    margin-bottom: 36px;
+}
+.cont2{
+    margin-top: 199px;
+}
+.clock{
+    margin-right: 16px;
+    margin-bottom: 34px;
+}
+.raspisanie{
+    margin-right: 30px;
+    margin-bottom: 28px;
+}
+.contacts p{
+    font-family: Museo Sans Cyrl,sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000;
+}
+.contacts a{
+    font-family: Museo Sans Cyrl,sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000;
+}
+.contacts a:hover{
+    color: #DCA818;
+    text-decoration: none;
+}
+.kont{
+    font-size: 20px;
+    margin-right: 10px;
+}
+.pdf{
+    width: 38px;
+    height: 38px;
+    margin-right: 17px;
+}
+.sdvig{
+    margin-left: 73px;
+}
+.forma{
+    width: 325px;
+    height: 464px;
+    background-color: #DCA818;
+    margin-bottom: 100px;
+    padding: 0;
+    margin-top: 152px;
+}
+.forma h1{
+    font-family: Museo Sans Cyrl,sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 30px;
+    color: #ffffff;
+    padding-top: 29px;
+    margin-bottom: 26px;
+}
+input::-moz-placeholder {
+    color: #CACACA;
+    font-family: Museo Sans Cyrl,sans-serif;
+    text-decoration-line: underline;
+}
+input::-webkit-input-placeholder {
+    color: #CACACA;
+    font-family: Museo Sans Cyrl,sans-serif;
+    text-decoration-line: underline;
+}
+.form input{
+    padding: 12px 0px 12px 20px;
+    font-family: Museo Sans Cyrl,sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #CACACA;
+    width: 264px;
+    height: 42px;
+    border: 0;
+    margin-bottom: 23px;
+    margin-left: 31px;
+}
+.form button{
+    width: 180px;
+    height: 50px;
+    background: #10c9c3;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    border: 0;
+    margin-top: 60px;
 
-
-
-
-
-
-
+}
+.form button:hover{
+    color: #000000;
+}
+.form__name{
+    width: 264px;
+    height: 42px;
+    color: #CACACA;
+}
+.form__email{
+    width: 264px;
+    height: 42px;
+}
+.form__number{
+    width: 264px;
+    height: 42px;
+}
+.form__com{
+    width: 264px !important;
+    height: 90px !important;
+    font-family: Museo Sans Cyrl, sans-serif;
+    font-weight: 400;
+    color: #CACACA;
+    font-size: 18px;
+    border: 0;
+}
+textarea{
+    color: #CACACA;
+    font-family: Museo Sans Cyrl,sans-serif;
+    text-decoration-line: underline;
+    padding: 12px 0px 12px 20px;
+}
+footer{
+    height: 255px;
+    background: #333232;
+}
+footer h1{
+    margin-top: 36px;
+    font-family: Museo Sans Cyrl,sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 31px;
+    color: #DCA818;
+}
+.foot__menu{
+    padding: 0;
+}
+.foot__menu_1{
+    margin-right: 29px;
+}
+footer a, p{
+    font-family: Museo Sans Cyrl,sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    color: #ffffff;
+}
+footer a:hover{
+    color: #DCA818;
+    text-decoration: none;
+    cursor: pointer;
+}
+.foot__menu p{
+    margin-top: 25px;
+}
+footer i{
+    color: #DCA818;
+    font-size: 20px;
+    margin-left: 10px;
+}
+.ii{
+    margin-top: 15px;
+}
 
 @font-face {
     font-family: Museo Sans Cyrl, sans-serif;
